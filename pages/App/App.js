@@ -16,6 +16,17 @@ class App extends Component {
       user_location: null, 
     } 
   }
+  //---Helper Methods ---//
+
+  //---Callback Methods---//
+  handleSignup = () => {
+    this.setState({user: userService.getUser()});
+  }
+
+  handleLogout = () => {
+    userService.logout();
+    this.setState({user:null});
+  }
 
   //---lifecycle methods ---//
   componentDidMount() {
@@ -29,6 +40,28 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Where The &lt;Bleep&gt; Are You?!?</h1>
         </header>
+          <Router>
+            <Switch>
+              <Route exact path='/' render={() => 
+              <MainPage
+                user={this.state.user}
+                handleLogout={this.handleLogout}
+              />
+              }/>
+              <Route exact path='/signup' render={(props) => 
+              <SignupPage
+              {...props}
+                handleSignup={this.handleSignup}              
+              />
+              }/>
+              <Route exact path='/login' render={(props) =>
+              <LoginPage
+                history={props.history}
+                handleLogin={this.handleLogin}
+              />
+              }/>
+              </Switch>
+            </Router>
       </div>
     );
   }
