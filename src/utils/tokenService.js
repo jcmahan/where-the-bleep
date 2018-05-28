@@ -9,9 +9,9 @@ function getToken() {
     var token = localStorage.getItem('token');
     if (token) {
         var payload = JSON.parse(atob(token.split('.')[1]));
-        if (payload.exp < Date.now()/1000) {
+        if (payload.exp < Date.now() / 1000) {
             localStorage.removeItem('token');
-            token=null;
+            token = null;
         }
     }
     return token; 

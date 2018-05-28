@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
 
-class SignupPage extends Component{
+class SignupForm extends Component{
     constructor(props){
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ class SignupPage extends Component{
         e.preventDefault();
         userService.signup(this.state)
         .then(()=> {
-            this.handleSignup();
+            this.props.handleSignup();
             this.props.history.push('/')
         })
         .catch(err => this.props.updateMessage(err.message));
@@ -67,4 +67,4 @@ class SignupPage extends Component{
     }
 };
 
-export default SignupPage; 
+export default SignupForm; 

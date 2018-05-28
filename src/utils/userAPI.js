@@ -1,8 +1,8 @@
-const BASE_URL = '/api/users';
+const BASE_URL = '/api/users/';
 
 function signup(user) {
-    return fetch(BASE_URL + 'signup', {
-        method: POST, 
+    return fetch(BASE_URL + `signup`, {
+        method: 'POST', 
         headers: new Headers({'Content-type': 'application/json'}),
         body: JSON.stringify(user)
     })
@@ -12,9 +12,9 @@ function signup(user) {
     })
     .then(({token})=> token);
 }
-function login(creds){
-    return fetch(BASE_URL + 'login', {
-        method: POST, 
+function login(creds) {
+    return fetch(BASE_URL + `login`, {
+        method: 'POST', 
         headers: new Headers({'Content-type': 'application/json'}),
         body: JSON.stringify(creds)
     })
