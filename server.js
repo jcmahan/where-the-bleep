@@ -8,6 +8,8 @@ require('dotenv').config();
 require('./config/database');
 
 var app = express();
+var server = require('http').Server(app); 
+var io = require('socket.io')(server);
 
 app.use(logger('dev'));
 
@@ -18,6 +20,7 @@ app.use(require('./config/auth'))
 
 // Put API routes here, before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));
+app.use('/api/events', require('./routes/api/events'))
 
 // The following "catch all" route is necessary for
 // a SPA's client-side routing to properly work

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../../models/user');
-var usersCtrl = require('../../controllers/users');
+var usersCtrl = require('../../controllers/usersCtrl');
 
 /*-- public routes --*/
 router.post('/signup', usersCtrl.signup);
