@@ -22,12 +22,20 @@ componentDidMount() {
             }
         );       
     });
+    // var marker = new window.google.maps.Marker({
+    //     position: { lat: user.coords.latitude, lng: user.coords.longitude },
+    //     map: this.map,
+    //     title: '{user.name}'
+    // });
 }
 
     render() {
         return ( 
             <div id='map' ref={(div) => this.mapDiv = div}>
-                <h1>Loading...</h1>
+                <h1>Big Brother is trying to find you...</h1>
+                <br/>
+                <br/>
+                <img src='https://i.imgur.com/QyK3QKe.gif'/>
             </div>
         );
     }

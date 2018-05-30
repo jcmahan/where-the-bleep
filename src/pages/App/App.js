@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import {
-  BrowserRouter as Router,
   Link,
   Switch,
   Route,
@@ -11,7 +10,8 @@ import userService from "../../utils/userService";
 import MainPage from "../../pages/MainPage/MainPage";
 import SignupPage from "../../pages/SignupPage/SignupPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
-import EventPage from '../../pages/EventPage/EventPage'
+import EventPage from '../../pages/EventPage/EventPage';
+import NavBar from '../../components/NavBar/NavBar';
 
 class App extends Component {
   constructor(props) {
@@ -48,16 +48,19 @@ class App extends Component {
       <div className='App'>
         <header className="App-header">
           <h1 className="App-title">Where The &lt;Bleep&gt; Are You?!?</h1>
+            <NavBar
+              user={this.state.user}
+              handleLogout={this.handleLogout}
+              />
         </header>
-        <Router>
           <Switch>
             <Route
               exact
               path="/"
               render={() => (
                 <MainPage
-                  user={this.state.user}
-                  handleLogout={this.handleLogout}
+                user={this.state.user}
+                handleLogout={this.handleLogout}
                 />
               )}
             />
@@ -65,7 +68,10 @@ class App extends Component {
               exact
               path="/signup"
               render={props => (
-                <SignupPage {...props} handleSignup={this.handleSignup} />
+                <SignupPage 
+                {...props} 
+                handleSignup={this.handleSignup} 
+                />
               )}
             />
             <Route
@@ -82,10 +88,14 @@ class App extends Component {
             <Route
               exact
               path="/events"
-              render={props => <EventPage {...props} user={this.state.user} />}
+              render={props => 
+              <EventPage 
+              {...props} 
+              user={this.state.user} 
+              history={props.history}
+              />}
             />
           </Switch>
-        </Router>
       </div>
     );
   }
