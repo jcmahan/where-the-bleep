@@ -4,7 +4,8 @@ var Event = require('../../models/event');
 var eventsCtrl = require('../../controllers/eventsCtrl')
 
 /*-- private routes --*/
-router.post('/create', eventsCtrl.create);
-router.post('/join', eventsCtrl.join);
+router.get('/', eventsCtrl.index);
+router.post('/', eventsCtrl.create);
+router.post('/:id/join', eventsCtrl.join);
 
 module.exports = router; 

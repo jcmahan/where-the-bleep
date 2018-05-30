@@ -8,14 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC|Cabin" rel="stylesheet">
     <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDjGr9aSGmnDGa6BRkyE_Mce-_poc1BIH8' async
     defer></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io.connect('http://localhost');
-      socket.on('news', function (data) {
-      console.log(data);
-      socket.emit('my other event', { my: 'data' });
-      });
-    </script>
+    <!-- <script defer src="/socket.io/socket.io.js"></script> -->
 
     <!--
       manifest.json provides metadata used when your web app is added to the

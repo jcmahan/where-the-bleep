@@ -33,7 +33,17 @@ function createJWT(user) {
         {expiresIn: '24h'}
     );
 }
+function index(req, res) {
+    User.find({})
+    .then(function(user){
+        res.status(200).json(user)
+    })
+    .catch(err => {
+        res.status(401).json(err)
+    })
+};
 module.exports = {
     signup, 
-    login
+    login,
+    index
 };

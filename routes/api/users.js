@@ -4,6 +4,7 @@ var User = require('../../models/user');
 var usersCtrl = require('../../controllers/usersCtrl');
 
 /*-- public routes --*/
+router.get('/index', usersCtrl.index)
 router.post('/signup', usersCtrl.signup);
 router.post('/login', usersCtrl.login);
 

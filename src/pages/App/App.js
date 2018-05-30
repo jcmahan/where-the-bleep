@@ -7,17 +7,20 @@ import {
   Redirect
 } from "react-router-dom";
 import userService from "../../utils/userService";
+import tokenService from '../../utils/tokenService';
 import MainPage from "../../pages/MainPage/MainPage";
 import SignupPage from "../../pages/SignupPage/SignupPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
-import EventPage from '../../pages/EventPage/EventPage';
 import NavBar from '../../components/NavBar/NavBar';
+import EventsPage from '../../pages/EventsPage/EventsPage';
+import NewEventsPage from '../../pages/NewEventsPage/NewEventsPage';
+import socket from '../../utils/socket';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
+      user: userService.getUser(), 
       user_location: null
     };
   }
@@ -26,21 +29,24 @@ class App extends Component {
   //---Callback Methods---//
   handleLogin = () => {
     this.setState({ user: userService.getUser() });
+    if (this.state.user) socket.emit('register', tokenService.getToken());
   };
 
   handleSignup = () => {
     this.setState({ user: userService.getUser() });
+    if (this.state.user) socket.emit('register', tokenService.getToken());
   };
 
   handleLogout = () => {
     userService.logout();
     this.setState({ user: null });
+    if (this.state.user) socket.emit('register', null);
   };
 
   //---lifecycle methods ---//
   componentDidMount() {
-    let user = userService.getUser();
-    this.setState({ user });
+    if (this.state.user) socket.emit('register', tokenService.getToken());
+
   }
 
   render() {
@@ -87,11 +93,19 @@ class App extends Component {
             />
             <Route
               exact
-              path="/events"
+              path="/newevent"
               render={props => 
-              <EventPage 
-              {...props} 
+              <NewEventsPage 
               user={this.state.user} 
+              history={props.history}
+              />}
+            />
+            <Route 
+              exact 
+              path='/events'
+              render={props => 
+              <EventsPage
+              user={this.state.user}
               history={props.history}
               />}
             />
