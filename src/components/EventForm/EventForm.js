@@ -43,7 +43,6 @@ handleSubmit = e => {
         .then(events => {
             this.setState({events})
             this.props.history.push('/')
-            console.log('hi jon')
     })
 };
 

@@ -29,19 +29,20 @@ function create(event) {
         throw new Error('Something went wrong!'); 
     })
 }
-// function join(event)     
-//     return fetch(BASE_URL + `join`, {
-//     method: 'POST', 
-//     headers: new Headers({'Content-type': 'application/json'}),
-//     body: JSON.stringify(event)
-// })
-// .then(res => {
-//     if (res.ok) return res.json(); 
-//     throw new Error('Something went wrong!'); 
-// })
+function joinEvt(event, user) {    
+        return fetch(BASE_URL + `${event._id}/join`, {
+        method: 'POST', 
+        headers: new Headers({'Content-type': 'application/json'}),
+        body: JSON.stringify(tokenService.getUserFromToken())
+    })
+    .then(res => {
+        if (res.ok) return res.json(); 
+        throw new Error('Something went wrong!'); 
+    })
+}
 
 export default {
     index, 
     create, 
-    // join
+    joinEvt
 }

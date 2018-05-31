@@ -18,9 +18,9 @@ function create(req, res){
 };
 
 function join(req, res) {
-    Event.findOne(req.params.id)
+    Event.findOne({_id: req.params.id})
     .then(function(event){
-        event.eventAttendees.push(req.user._id);
+        event.eventAttendees.push(req.body);
         event.save(); 
     })
 }
