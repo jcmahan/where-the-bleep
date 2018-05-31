@@ -1,7 +1,7 @@
 var Event = require('../models/event');
 
 function index(req, res) {
-    Event.find({})
+    Event.find({}).sort({eventTitle: 1}).exec()
     .then(function(events){
         res.status(200).json(events)
     })
@@ -21,8 +21,13 @@ function join(req, res) {
     Event.findOne({_id: req.params.id})
     .then(function(event){
         event.eventAttendees.push(req.body);
-        event.save(); 
+        event.save().then(() => {
+            Event.find({}).sort({eventTitle: 1}).exec().then(events => {
+                res.status(200).json(events);
+            });
+        });
     })
+    .catch(err => res.status(401).json(err));
 }
 module.exports = {
     create,

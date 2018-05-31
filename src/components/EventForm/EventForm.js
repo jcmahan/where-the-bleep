@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import userService from "../../utils/userService";
 import tokenService from "../../utils/tokenService";
 import eventAPI from "../../utils/eventAPI";
+import './EventForm.css';
+
 
 class EventForm extends Component {
     constructor(props) {
@@ -51,7 +53,7 @@ render() {
         <div>
         <form className="form-horizontal" onSubmit={this.handleSubmit}>
             <div className="form-group">
-            <div className="col-sm-12">
+            <div className="col-sm-12 col-offset-1">
                 <input
                 type="text"
                 className="form-control"
@@ -62,7 +64,7 @@ render() {
             </div>
             </div>
             <div className="form-group">
-                <div className="col-sm-12">
+                <div className="col-sm-12 col-offset-1">
                 <input
                 type="text"
                 className="form-control"
@@ -73,7 +75,7 @@ render() {
             </div>
             </div>
             <div className="form-group">
-            <div className="col-sm-12">
+            <div className="col-sm-12 col-offset-1">
                 <input
                 type="text"
                 className="form-control"
@@ -84,7 +86,7 @@ render() {
             </div>
             </div>
             <div className="form-group">
-            <div className="col-sm-12">
+            <div className="col-sm-12 col-offset-1">
                 <input
                 type="text"
                 className="form-control"
@@ -95,7 +97,7 @@ render() {
             </div>
             </div>
             <div className="form-group">
-            <div className="col-sm-12">
+            <div className="col-sm-12 col-offset-1">
                 <input
                 type="date"
                 className="form-control"
@@ -106,7 +108,7 @@ render() {
             </div>
             </div>
             <div className="form-group">
-            <div className="col-sm-12">
+            <div className="col-sm-12 col-offset-1">
                 <input
                 type="string"
                 className="form-control"

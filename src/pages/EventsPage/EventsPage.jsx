@@ -11,6 +11,11 @@ class EventsPage extends Component {
             events: [], 
         }
     }
+
+    updateEvents = (events) => {
+        this.setState({events});
+    } 
+
     componentDidMount() {
         fetch('/api/events'/*, this.getAuthRequestOptions('GET')*/)
         .then(res => {
@@ -21,12 +26,12 @@ class EventsPage extends Component {
 }
 /*-Helper Methods-*/
 
-getAuthRequestOptions(method) {
-    return {
-        method: method, 
-        headers: new Headers({'Authorization': 'Bearer' + tokenService.getToken()})
-    };
-}
+    getAuthRequestOptions(method) {
+        return {
+            method: method, 
+            headers: new Headers({'Authorization': 'Bearer' + tokenService.getToken()})
+        };
+    }
 
     render() {
         return (
@@ -35,6 +40,7 @@ getAuthRequestOptions(method) {
                 user={this.props.user}
                 history={this.props.history}
                 events={this.state.events}
+                updateEvents={this.updateEvents}
             />
         </div>
     );

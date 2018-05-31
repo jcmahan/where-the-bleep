@@ -4,40 +4,47 @@ import eventAPI from "../../utils/eventAPI";
 import './EventIndexPage.css'
 
 class EventIndexPage extends Component {
-
     formatDate(x) {
         var str = x.split("-");
         return str[1] + "/" + str[2].substring(0, 2) + "/" + str[0];
     }
 
-    joinEvent(evt) {
-        eventAPI.joinEvt(evt, this.props.user).then(res => res.json())
+    joinEvent(e, event) {
+        e.preventDefault();
+        eventAPI.joinEvt(event, this.props.user)
         .then(events => {
-            this.props.history.push('/')
-        })
-        
+            console.log(events)
+            this.props.updateEvents(events);
+        });
     }
 
     render() {
-        const eventRows = this.props.events ? this.props.events.map((event, idx) => 
-        
-        <tr key={idx}>
-            <td>{event.eventTitle}</td>
-            <td>{event.eventStreetAddress}</td>
-            <td>{event.eventCity}</td>
-            <td>{event.eventState}</td>
-            <td>{this.formatDate(event.eventDate)}</td>
-            <td>{event.eventTime}</td>
-            <td><button onClick={() => this.joinEvent(event)} type='button' className="btn btn-dark btn-sm" to={`/events/index/${event._id}`} style={{ marginTop: 25, marginRight: 25 }}>
-            Join Event
-        </button></td>
-        </tr>) : <h1>Loading...</h1>
+        const eventRows = this.props.events.length ? this.props.events.map((event, idx) => 
+            <tr key={idx}>
+                <td>{event.eventTitle}</td>
+                <td>{event.eventStreetAddress}</td>
+                <td>{event.eventCity}</td>
+                <td>{event.eventState}</td>
+                <td>{this.formatDate(event.eventDate)}</td>
+                <td>{event.eventTime}</td>
+                <td>{(
+                    (this.props.user._id === event.eventHost) ||
+                    event.eventAttendees.includes(this.props.user._id)
+                    ) ? null :
+                        <button onClick={(e) => this.joinEvent(e, event)} className="btn btn-dark btn-sm" style={{ marginRight: 25 }}>
+                            Join Event
+                        </button>
+                    }
+                </td>
+            </tr>)
+        :
+            <h1>Loading...</h1>
 
         return (
-            <div className="HighScores">
+            <div className="EvtIdx">
             {this.props.events.length ? (
-            <table className="table HighScores-table text-info">
-                <thead>
+            <table className="table EvtIdx-tableData text-info">
+                <thead className="headers">
                     <tr>
                         <th>Event Name</th>
                         <th>Address</th>
