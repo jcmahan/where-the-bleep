@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import tokenService from '../../utils/tokenService';
-import EventForm from '../../components/EventForm/EventForm';
+import EventIndexPage from '../../pages/EventIndexPage/EventIndexPage';
 import NavBar from '../../components/NavBar/NavBar'
 import './EventsPage.css'
 
@@ -31,9 +31,10 @@ getAuthRequestOptions(method) {
     render() {
         return (
         <div className='EventPage'>
-            <EventForm
+            <EventIndexPage
                 user={this.props.user}
                 history={this.props.history}
+                events={this.state.events}
             />
         </div>
     );

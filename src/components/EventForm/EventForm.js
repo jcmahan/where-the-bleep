@@ -9,7 +9,7 @@ class EventForm extends Component {
     super(props);
     this.state = {
         eTitle: "",
-        eAddress: "",
+        eStreetAddress: "",
         eCity: "",
         eState: "",
         eDate: "",
@@ -32,7 +32,7 @@ handleSubmit = e => {
         }),
         body: JSON.stringify({
             eventTitle: this.state.eTitle,
-            eventAddress: this.state.eAddress,
+            eventStreetAddress: this.state.eStreetAddress,
             eventCity: this.state.eCity,
             eventState: this.state.eState,
             eventDate: this.state.eDate,
@@ -68,8 +68,8 @@ render() {
                 type="text"
                 className="form-control"
                 placeholder="street address"
-                value={this.state.eventAddress}
-                onChange={e => this.handleChange("eAddress", e)}
+                value={this.state.eventStreetAddress}
+                onChange={e => this.handleChange("eStreetAddress", e)}
                 />
             </div>
             </div>

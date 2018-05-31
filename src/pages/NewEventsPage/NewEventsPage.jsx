@@ -34,6 +34,7 @@ getAuthRequestOptions(method) {
             <EventForm
                 user={this.props.user}
                 history={this.props.history}
+                events={this.events}
             />
         </div>
     );
