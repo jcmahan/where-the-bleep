@@ -20,6 +20,10 @@ function init(http) {
     io = require('socket.io')(http);
     
     io.on('connection', function(socket) { 
+        
+        socket.on('disconnect', function(socket) {
+            console.log(`disconnected from eventID: ${socket.eventId}`)
+        });
 
         socket.on('register', function(token) {
             jwt.verify(token, SECRET, function(err, decoded) {
@@ -49,7 +53,23 @@ function init(http) {
         });
 
         socket.on('leave-event', function(eventId) {
-            socket.leave(eventId);
+            getOrFetchEvent(eventId).then(event => {
+                if (!event) return;
+                event.userLocations.splice(
+                    event.userLocations.findIndex(loc => loc.userId === socket.user._id),
+                    1
+                );
+                event.save();
+                io.to(eventId).emit('update-locations', event.userLocations);
+                socket.leave(eventId, function() {
+                    io.in(eventId).clients(function(err, clients) {
+                        if (!clients.length) {
+                            event.userLocations = [];
+                            event.save();
+                        }
+                    });
+                });
+            });
         });
         
     });

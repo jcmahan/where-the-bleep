@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import {
-  Link,
   Switch,
   Route,
   Redirect
@@ -49,11 +48,13 @@ class App extends Component {
     this.props.history.push('/');
   }
 
+  removeTrackingEvent = () => {
+    this.setState({trackingEvent: null});
+  }
 
   //---lifecycle methods ---//
   componentDidMount() {
     if (this.state.user) socket.emit('register', tokenService.getToken());
-
   }
 
   render() {
@@ -73,12 +74,14 @@ class App extends Component {
               path="/"
               render={(props) => (
                 userService.getUser() ?
-                <MainPage
-                user={this.state.user}
-                handleLogout={this.handleLogout}
-                trackingEvent={this.state.trackingEvent} />
-                  :
-                <Redirect to='/login' />
+                  <MainPage
+                    user={this.state.user}
+                    handleLogout={this.handleLogout}
+                    trackingEvent={this.state.trackingEvent}
+                    removeTrackingEvent={this.removeTrackingEvent}
+                  />
+                :
+                 <Redirect to='/login' />
               )}/>
             <Route
               exact

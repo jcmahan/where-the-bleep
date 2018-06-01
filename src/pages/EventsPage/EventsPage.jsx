@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import tokenService from '../../utils/tokenService';
 import EventIndexPage from '../../pages/EventIndexPage/EventIndexPage';
-import NavBar from '../../components/NavBar/NavBar'
 import './EventsPage.css'
 
 class EventsPage extends Component {

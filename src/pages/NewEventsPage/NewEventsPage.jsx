@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import tokenService from '../../utils/tokenService';
 import EventForm from '../../components/EventForm/EventForm';
-import NavBar from '../../components/NavBar/NavBar'
 import './NewEventsPage.css'
 
 class NewEventsPage extends Component {
@@ -12,12 +11,12 @@ class NewEventsPage extends Component {
         }
     }
     componentDidMount() {
-        fetch('/api/events'/*, this.getAuthRequestOptions('GET')*/)
+        fetch('/api/events', this.getAuthRequestOptions('GET'))
         .then(res => {
             if (res.ok) return res.json();
-        throw new Error ('Bad Credentials!');
-    })
-    .then(events => this.setState({events}));
+            throw new Error ('Bad Credentials!');
+        })
+        .then(events => this.setState({events}));
 }
 /*-Helper Methods-*/
 
