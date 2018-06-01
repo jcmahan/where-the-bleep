@@ -17,19 +17,19 @@ class EventsPage extends Component {
     } 
 
     componentDidMount() {
-        fetch('/api/events'/*, this.getAuthRequestOptions('GET')*/)
+        fetch('/api/events', this.getAuthRequestOptions('GET'))
         .then(res => {
             if (res.ok) return res.json();
-        throw new Error ('Bad Credentials!');
-    })
-    .then(events => this.setState({events}));
-}
+            throw new Error ('Bad Credentials!');
+        })
+        .then(events => this.setState({events}));
+    }
 /*-Helper Methods-*/
 
     getAuthRequestOptions(method) {
         return {
             method: method, 
-            headers: new Headers({'Authorization': 'Bearer' + tokenService.getToken()})
+            headers: new Headers({'Authorization': 'Bearer ' + tokenService.getToken()})
         };
     }
 
@@ -41,6 +41,7 @@ class EventsPage extends Component {
                 history={this.props.history}
                 events={this.state.events}
                 updateEvents={this.updateEvents}
+                handleTracking={this.props.handleTracking}
             />
         </div>
     );

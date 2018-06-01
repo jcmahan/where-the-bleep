@@ -1,45 +1,80 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import userService from '../../utils/userService';
+import socket from '../../utils/socket';
 import './Map.css'
 
 class Map extends Component {
     constructor(props){
-    super(props);
-    this.state = {
-        usersLocations: []
-    };
-    this.map = null;
-}
-/*--Lifecycle Methods--*/
+        super(props);
+        this.map = null;
+    }
 
-componentDidMount() {
-
-    const options = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-      };
-
-    window.navigator.geolocation.getCurrentPosition(({ coords }) => {
-        console.log(coords);
-
-        this.map = new window.google.maps.Map(this.mapDiv, 
-            {
-                center: { lat: coords.latitude, lng: coords.longitude },
-                zoom: 20
+    drawMarkers = () => {
+        this.userLocations.forEach(loc => {
+            if (loc.marker) {
+                loc.marker.setMap(null);
+                loc.marker = null;
             }
-        );
-
-        var marker = new window.google.maps.Marker({
-            position: { lat: coords.latitude, lng: coords.longitude },
-            map: this.map,
-            draggable: true, 
-            animation: window.google.maps.Animation.DROP, 
-            title: "Hello!"
+            loc.marker = new window.google.maps.Marker({
+                position: { lat: loc.lat, lng: loc.lng },
+                map: this.map,
+                animation: window.google.maps.Animation.DROP, 
+                title: loc.name,
+                icon: loc.userId === this.props.user._id ? 'me' : 'them'
+            });
         });
-    }, null, options);
+    }
 
+    setupRealtime = () => {
+        socket.emit('join-event', this.props.trackingEvent._id);
+        window.navigator.geolocation.watchPosition(({coords}) => {
+            socket.emit('update-location', {lat: coords.latitude, lng: coords.longitude});
+            this.map = new window.google.maps.Map(this.mapDiv, 
+                {
+                    center: { lat: coords.latitude, lng: coords.longitude },
+                    zoom: 20
+                }
+            );
+        }, null, this.options);
+        socket.on('update-locations', (locations) => {
+            this.userLocations = locations;
+            this.drawMarkers();
+        });
+    }
+    /*--Lifecycle Methods--*/
+
+    componentDidMount() {
+        this.options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+        if(this.props.trackingEvent) {
+            this.setupRealtime();
+        } else {
+            window.navigator.geolocation.getCurrentPosition(({ coords }) => {
+                this.map = new window.google.maps.Map(this.mapDiv, 
+                    {
+                        center: { lat: coords.latitude, lng: coords.longitude },
+                        zoom: 20
+                    }
+                );
+                var marker = new window.google.maps.Marker({
+                    position: { lat: coords.latitude, lng: coords.longitude },
+                    map: this.map,
+                    draggable: true, 
+                    animation: window.google.maps.Animation.DROP, 
+                    title: this.props.user.name
+                });
+            }, null, this.options);
+        }
+
+    }
+
+    componentWillUnmount() {
+        this.props.trackingEvent && socket.emit('leave-event', this.props.trackingEvent._id);
+        socket.off('update-locations');
     }
 
     render() {

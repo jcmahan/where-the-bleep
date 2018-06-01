@@ -12,6 +12,8 @@ const NavBar = (props) => {
         <Link to='' className='NavBar-link' onClick={props.handleLogout} >LOG OUT</Link>
         &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
         <span className='NavBar-welcome'>WELCOME, {props.user.name}</span>
+        <br/>
+        <span className='NavBar-trackingEvent'>{ props.trackingEvent ? `currently tracking people attending ${props.trackingEvent.eventTitle}` : 'not currently tracking any events' } </span>
     </div>
     :
     <div>

@@ -21,7 +21,8 @@ class App extends Component {
     super(props);
     this.state = {
       user: userService.getUser(), 
-      user_location: null
+      user_location: null,
+      trackingEvent: null, 
     };
   }
   //---Helper Methods ---//
@@ -43,6 +44,12 @@ class App extends Component {
     if (this.state.user) socket.emit('register', null);
   };
 
+  handleTracking = (event) => {
+    this.setState({trackingEvent: event});
+    this.props.history.push('/');
+  }
+
+
   //---lifecycle methods ---//
   componentDidMount() {
     if (this.state.user) socket.emit('register', tokenService.getToken());
@@ -53,10 +60,11 @@ class App extends Component {
     return (
       <div className='App'>
         <header className="App-header">
-          <h1 className="App-title">Where The &lt;Bleep&gt; Are You?!?</h1>
+          <h1 className="App-title">&#191; Where The &lt;Bleep&gt; Are You ?</h1>
             <NavBar
               user={this.state.user}
               handleLogout={this.handleLogout}
+              trackingEvent={this.state.trackingEvent}
               />
         </header>
           <Switch>
@@ -67,6 +75,7 @@ class App extends Component {
                 <MainPage
                 user={this.state.user}
                 handleLogout={this.handleLogout}
+                trackingEvent={this.state.trackingEvent}
                 />
               )}
             />
@@ -107,6 +116,7 @@ class App extends Component {
               <EventsPage
               user={this.state.user}
               history={props.history}
+              handleTracking={this.handleTracking}
               />}
             />
           </Switch>

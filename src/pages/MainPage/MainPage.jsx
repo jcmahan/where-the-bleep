@@ -9,6 +9,7 @@ const MainPage = (props) => {
         <div className='MainPage'>
             <Map 
                 user={props.user}
+                trackingEvent={props.trackingEvent}
             />
         </div>
     )

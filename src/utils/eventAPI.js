@@ -14,7 +14,7 @@ function index() {
 function getAuthRequestOptions(method) {
     return {
         method: method, 
-        headers: new Headers({'Authorization': 'Bearer' + tokenService.getToken()})
+        headers: new Headers({'Authorization': 'Bearer ' + tokenService.getToken()})
     };
 }
 

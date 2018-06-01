@@ -13,7 +13,6 @@ class EventIndexPage extends Component {
         e.preventDefault();
         eventAPI.joinEvt(event, this.props.user)
         .then(events => {
-            console.log(events)
             this.props.updateEvents(events);
         });
     }
@@ -30,7 +29,10 @@ class EventIndexPage extends Component {
                 <td>{(
                     (this.props.user._id === event.eventHost) ||
                     event.eventAttendees.includes(this.props.user._id)
-                    ) ? null :
+                    ) ? <button onClick={() => this.props.handleTracking(event)} className="btn btn-danger btn-sm" style={{ marginRight: 25 }}>
+                    &#191;WTBAY&#63;
+                        </button> 
+                        :
                         <button onClick={(e) => this.joinEvent(e, event)} className="btn btn-dark btn-sm" style={{ marginRight: 25 }}>
                             Join Event
                         </button>

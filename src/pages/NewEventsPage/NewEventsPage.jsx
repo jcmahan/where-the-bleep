@@ -24,7 +24,7 @@ class NewEventsPage extends Component {
 getAuthRequestOptions(method) {
     return {
         method: method, 
-        headers: new Headers({'Authorization': 'Bearer' + tokenService.getToken()})
+        headers: new Headers({'Authorization': 'Bearer ' + tokenService.getToken()})
     };
 }
 
