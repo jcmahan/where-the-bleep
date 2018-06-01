@@ -19,7 +19,6 @@ class Map extends Component {
             loc.marker = new window.google.maps.Marker({
                 position: { lat: loc.lat, lng: loc.lng },
                 map: this.map,
-                animation: window.google.maps.Animation.DROP, 
                 title: loc.name,
                 icon: loc.userId === this.props.user._id ? 'https://i.imgur.com/EvF2eZx.png' : 'https://i.imgur.com/jqyQN9V.png'
             });
@@ -33,7 +32,7 @@ class Map extends Component {
             this.map = new window.google.maps.Map(this.mapDiv, 
                 {
                     center: { lat: coords.latitude, lng: coords.longitude },
-                    zoom: 20
+                    zoom: 12
                 }
             );
         }, null, this.options);
@@ -57,7 +56,7 @@ class Map extends Component {
                 this.map = new window.google.maps.Map(this.mapDiv, 
                     {
                         center: { lat: coords.latitude, lng: coords.longitude },
-                        zoom: 20
+                        zoom: 18
                     }
                 );
                 var marker = new window.google.maps.Marker({
