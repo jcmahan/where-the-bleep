@@ -21,7 +21,10 @@ function getAuthRequestOptions(method) {
 function create(event) {
     return fetch(BASE_URL + `create`, {
         method: 'POST', 
-        headers: new Headers({'Content-type': 'application/json'}),
+        headers: new Headers({
+            'Authorization': 'Bearer ' + tokenService.getToken(), 
+            'Content-type': 'application/json'
+        }),
         body: JSON.stringify(event)
     })
     .then(res => {
@@ -32,7 +35,10 @@ function create(event) {
 function joinEvt(event, user) {    
         return fetch(BASE_URL + `${event._id}/join`, {
         method: 'POST', 
-        headers: new Headers({'Content-type': 'application/json'}),
+        headers: new Headers({
+            'Authorization': 'Bearer ' + tokenService.getToken(), 
+            'Content-type': 'application/json'
+        }),
         body: JSON.stringify(tokenService.getUserFromToken())
     })
     .then(res => {

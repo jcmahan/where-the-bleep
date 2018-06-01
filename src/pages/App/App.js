@@ -71,14 +71,15 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={() => (
+              render={(props) => (
+                userService.getUser() ?
                 <MainPage
                 user={this.state.user}
                 handleLogout={this.handleLogout}
-                trackingEvent={this.state.trackingEvent}
-                />
-              )}
-            />
+                trackingEvent={this.state.trackingEvent} />
+                  :
+                <Redirect to='/login' />
+              )}/>
             <Route
               exact
               path="/signup"
@@ -103,22 +104,26 @@ class App extends Component {
             <Route
               exact
               path="/newevent"
-              render={props => 
+              render={(props) => (
+                userService.getUser() ?
               <NewEventsPage 
               user={this.state.user} 
-              history={props.history}
-              />}
-            />
+              history={props.history} />
+                :
+              <Redirect to='/login' />  
+              )}/>
             <Route 
               exact 
               path='/events'
-              render={props => 
+              render={(props) => (
+                userService.getUser() ?
               <EventsPage
               user={this.state.user}
               history={props.history}
-              handleTracking={this.handleTracking}
-              />}
-            />
+              handleTracking={this.handleTracking} />
+                :
+                <Redirect to='/login' />
+              )}/>
           </Switch>
       </div>
     );

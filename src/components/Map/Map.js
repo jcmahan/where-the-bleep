@@ -21,7 +21,7 @@ class Map extends Component {
                 map: this.map,
                 animation: window.google.maps.Animation.DROP, 
                 title: loc.name,
-                icon: loc.userId === this.props.user._id ? 'me' : 'them'
+                icon: loc.userId === this.props.user._id ? 'https://i.imgur.com/EvF2eZx.png' : 'https://i.imgur.com/jqyQN9V.png'
             });
         });
     }
