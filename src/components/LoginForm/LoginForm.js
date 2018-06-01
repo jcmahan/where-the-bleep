@@ -27,7 +27,7 @@ class LoginForm extends Component {
     render() {
         return(
             <div>
-                <header className='App-Header text-center'>LOG IN</header>
+                <header className='App-Header text-center'>LOG IN HERE TO START VIRTUALLY <del>STALKING</del> TRACKING YOUR FRIENDS </header>
                     <form className='form-horizontal' onSubmit={this.handleSubmit} >
                         <div className='form-group'>
                             <div className='col-sm-12'>
