@@ -21,7 +21,7 @@ Once a user signs up and opts in to being tracked, they are geolocated by their 
 
 A user can then look at scheduled upcoming events and join any event they might be interested in.
 
-![upcoming event page] (https://i.imgur.com/VBM0Uas.png "event page") 
+![upcoming event page](https://i.imgur.com/VBM0Uas.png "event page") 
 
 After being geolocated, that user can broadcast their location to other parties interested in that event. All connected users can then track each other in real time, thereby increasing accountability and letting people know where the <bleep> their friends actually are. 
 
