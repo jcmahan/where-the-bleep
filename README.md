@@ -37,7 +37,7 @@ This browser app was built using React, Express,  MongoDB, socket.io, the Google
 The wireframes can be viewed at  [James' Trello Page](https://trello.com/b/RDHfQP3p/where-the-bleep-are-you). 
 
 *Getting Started:*
-The app can be found at [where-the-bleep.heroku.com](https://hikingwithfriends.herokuapp.com/). 
+The app can be found at [where-the-bleep.heroku.com](https://where-the-bleep.herokuapp.com/). 
 
 *Next Steps:*
 In the coming months, I'm hoping to allow a user to automatically log out once they arrive at a location.
