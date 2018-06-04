@@ -1,4 +1,4 @@
-#*WHERE THE BLEEP*
+*WHERE THE BLEEP*
 
 &copy; James Mahan & General Assembly, WDI-57. 
 
@@ -31,15 +31,15 @@ The user will always know if they are being tracked, based upon the message at t
 
 Once a user has reached the destination (or decides they no longer want to broadcast their location to anyone), the user just has to log out and their location will no longer be broadcast.
 
-#*Technologies Used:* 
-This browser app was built using React, Express,  MongoDB, the Google Maps API, HTML, CSS, a bit of Bootstrap, and a couple of Google's best fonts. Huge props to my instructors and WDI family.
+*Technologies Used:* 
+This browser app was built using React, Express,  MongoDB, socket.io, the Google Maps API, HTML, CSS, a bit of Bootstrap, and a couple of Google's best fonts. Huge, huge props to my instructors and WDI family.
 
 The wireframes can be viewed at  [James' Trello Page](https://trello.com/b/RDHfQP3p/where-the-bleep-are-you). 
 
-#*Getting Started:*
+*Getting Started:*
 The app can be found at [where-the-bleep.heroku.com](https://hikingwithfriends.herokuapp.com/). 
 
-#*Next Steps:*
+*Next Steps:*
 In the coming months, I'm hoping to allow a user to automatically log out once they arrive at a location.
 
 Any further thoughts, questions, comments or concerns may be directed to <jcmahan@gmail.com>.
